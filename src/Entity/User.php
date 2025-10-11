@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -32,6 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $fullName = null;
+
+    #[ORM\OneToMany(targetEntity: StressAssessment::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $stressAssessments;
+
+    public function __construct()
+    {
+        $this->stressAssessments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,5 +125,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): static
+    {
+        $this->fullName = $fullName;
+        return $this;
+    }
+
+    public function getStressAssessments(): Collection
+    {
+        return $this->stressAssessments;
+    }
+
+    public function addStressAssessment(StressAssessment $stressAssessment): static
+    {
+        if (!$this->stressAssessments->contains($stressAssessment)) {
+            $this->stressAssessments->add($stressAssessment);
+            $stressAssessment->setUser($this);
+        }
+        return $this;
+    }
+    public function removeStressAssessment(StressAssessment $stressAssessment): static
+    {
+        if ($this->stressAssessments->removeElement($stressAssessment)) {
+            if ($stressAssessment->getUser() === $this) {
+                $stressAssessment->setUser(null);
+            }
+        }
+        return $this;
     }
 }
