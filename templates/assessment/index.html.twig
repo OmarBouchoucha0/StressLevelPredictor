@@ -1,20 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AssessmentController!{% endblock %}
+{% block title %}Stress Assessment{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body p-5">
+                <h1 class="text-center mb-4">
+                    <i class="fas fa-clipboard-check text-primary"></i> Stress Assessment
+                </h1>
+                <p class="text-center text-muted mb-5">
+                    Please answer the following questions honestly to get an accurate assessment of your stress levels.
+                </p>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                {{ form_start(assessmentForm) }}
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.sleepHours) }}
+                        {{ form_widget(assessmentForm.sleepHours) }}
+                        {{ form_errors(assessmentForm.sleepHours) }}
+                    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/omar/projects/webdev/stressLevelPredictor/src/Controller/AssessmentController.php</code></li>
-        <li>Your template at <code>/home/omar/projects/webdev/stressLevelPredictor/templates/assessment/index.html.twig</code></li>
-    </ul>
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.workHours) }}
+                        {{ form_widget(assessmentForm.workHours) }}
+                        {{ form_errors(assessmentForm.workHours) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.exerciseFrequency) }}
+                        {{ form_widget(assessmentForm.exerciseFrequency) }}
+                        {{ form_errors(assessmentForm.exerciseFrequency) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.anxietyLevel) }}
+                        {{ form_widget(assessmentForm.anxietyLevel) }}
+                        {{ form_errors(assessmentForm.anxietyLevel) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.moodLevel) }}
+                        {{ form_widget(assessmentForm.moodLevel) }}
+                        {{ form_errors(assessmentForm.moodLevel) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.socialSupport) }}
+                        {{ form_widget(assessmentForm.socialSupport) }}
+                        {{ form_errors(assessmentForm.socialSupport) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_label(assessmentForm.additionalNotes) }}
+                        {{ form_widget(assessmentForm.additionalNotes) }}
+                        {{ form_errors(assessmentForm.additionalNotes) }}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calculator"></i> Calculate My Stress Level
+                        </button>
+                        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Home
+                        </a>
+                    </div>
+                {{ form_end(assessmentForm) }}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

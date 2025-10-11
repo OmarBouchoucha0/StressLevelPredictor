@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home - Stress Predictor{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card text-center">
+            <div class="card-body p-5">
+                <i class="fas fa-heartbeat fa-4x text-primary mb-4"></i>
+                <h1 class="display-4 mb-4">Welcome, {{ user.fullName }}!</h1>
+                <p class="lead mb-4">
+                    Take control of your mental well-being by understanding your stress levels.
+                    Our advanced assessment tool will help you identify stress factors and provide
+                    personalized recommendations.
+                </p>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="row mt-5 mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3">
+                            <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                            <h5>Quick Assessment</h5>
+                            <p class="text-muted">Answer a few simple questions about your lifestyle</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3">
+                            <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                            <h5>Instant Results</h5>
+                            <p class="text-muted">Get your stress level analysis immediately</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3">
+                            <i class="fas fa-tasks fa-3x text-info mb-3"></i>
+                            <h5>Personalized Tips</h5>
+                            <p class="text-muted">Receive tailored recommendations to reduce stress</p>
+                        </div>
+                    </div>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/omar/projects/webdev/stressLevelPredictor/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/home/omar/projects/webdev/stressLevelPredictor/templates/home/index.html.twig</code></li>
-    </ul>
+                <a href="{{ path('app_assessment') }}" class="btn btn-primary btn-lg mt-3">
+                    <i class="fas fa-play-circle"></i> Start Stress Assessment
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
