@@ -6,96 +6,64 @@ use App\Entity\StressAssessment;
 
 class StressPredictionService
 {
-    public function predict(StressAssessment $assessment): array
-    {
-        // TODO: Replace this with your actual ML model integration
-        // This is a placeholder algorithm
+public function predict(StressAssessment $assessment): array
+{
+    // This will be replaced with your actual ML model
+    // For now, using a placeholder algorithm based on the dataset features
 
-        $score = 0;
+    $score = 0;
 
-        // Sleep factor (0-30 points)
-        $sleepScore = match(true) {
-            $assessment->getSleepHours() < 5 => 25,
-            $assessment->getSleepHours() < 6 => 15,
-            $assessment->getSleepHours() < 7 => 10,
-            $assessment->getSleepHours() <= 8 => 5,
-            default => 10
-        };
+    // Sleep (weight: 15%)
+    $sleepScore = match(true) {
+        $assessment->getSleepHours() < 6 => 15,
+        $assessment->getSleepHours() < 7 => 10,
+        $assessment->getSleepHours() <= 8 => 3,
+        default => 8
+    };
 
-        // Work hours factor (0-20 points)
-        $workScore = match(true) {
-            $assessment->getWorkHours() > 10 => 20,
-            $assessment->getWorkHours() > 8 => 12,
-            $assessment->getWorkHours() > 6 => 5,
-            default => 0
-        };
+    // Study hours (weight: 10%)
+    $studyScore = match(true) {
+        $assessment->getStudyHours() > 4 => 10,
+        $assessment->getStudyHours() > 3 => 6,
+        default => 2
+    };
 
-        // Exercise factor (0-15 points, inverse)
-        $exerciseScore = match(true) {
-            $assessment->getExerciseFrequency() === 0 => 15,
-            $assessment->getExerciseFrequency() < 3 => 10,
-            $assessment->getExerciseFrequency() < 5 => 5,
-            default => 0
-        };
+    // Anxiety level (weight: 25%) - most important
+    $anxietyScore = ($assessment->getAnxietyLevel() / 21) * 25;
 
-        // Anxiety level (0-20 points)
-        $anxietyScore = ($assessment->getAnxietyLevel() / 10) * 20;
+    // Self-esteem/Mood (weight: 15%) - inverse
+    $moodScore = ((30 - $assessment->getMoodLevel()) / 30) * 15;
 
-        // Mood level (0-15 points, inverse)
-        $moodScore = ((10 - $assessment->getMoodLevel()) / 10) * 15;
+    // Academic workload (weight: 10%)
+    $workloadScore = ($assessment->getAcademicWorkload() / 5) * 10;
 
-        // Social support (0-10 points, inverse)
-        $socialScore = ((10 - $assessment->getSocialSupport()) / 10) * 10;
+    // Financial stress (weight: 10%)
+    $financialScore = ($assessment->getFinancialStress() / 5) * 10;
 
-        $score = $sleepScore + $workScore + $exerciseScore + $anxietyScore + $moodScore + $socialScore;
+    // Social support (weight: 10%) - inverse
+    $socialScore = ((10 - $assessment->getSocialSupportLevel()) / 10) * 10;
 
-        // Determine stress level
-        $level = match(true) {
-            $score < 20 => 'Low',
-            $score < 40 => 'Moderate',
-            $score < 65 => 'High',
-            default => 'Very High'
-        };
+    // Physical activity (weight: 5%) - inverse
+    $activityScore = match($assessment->getPhysicalActivity()) {
+        'Low' => 5,
+        'Moderate' => 2,
+        'High' => 0,
+        default => 3
+    };
 
-        return [
-            'score' => round($score, 2),
-            'level' => $level
-        ];
-    }
+    $score = $sleepScore + $studyScore + $anxietyScore + $moodScore +
+             $workloadScore + $financialScore + $socialScore + $activityScore;
 
-    // Method to integrate your actual ML model
-    public function predictWithModel(StressAssessment $assessment): array
-    {
-        // Example structure for calling your Python ML model via API or command line
-        // You can use Symfony's HttpClient or Process component
+    // Determine stress level based on score
+    $level = match(true) {
+        $score < 20 => 'Low',
+        $score < 40 => 'Moderate',
+        $score < 65 => 'High',
+        default => 'Very High'
+    };
 
-        /*
-        $data = [
-            'sleep_hours' => $assessment->getSleepHours(),
-            'work_hours' => $assessment->getWorkHours(),
-            'exercise_frequency' => $assessment->getExerciseFrequency(),
-            'anxiety_level' => $assessment->getAnxietyLevel(),
-            'mood_level' => $assessment->getMoodLevel(),
-            'social_support' => $assessment->getSocialSupport(),
-        ];
-
-        // Option 1: Call Python script
-        $process = new Process(['python', 'path/to/your/model.py', json_encode($data)]);
-        $process->run();
-        $result = json_decode($process->getOutput(), true);
-
-        // Option 2: Call API endpoint
-        $response = $this->httpClient->request('POST', 'http://localhost:5000/predict', [
-            'json' => $data
-        ]);
-        $result = $response->toArray();
-
-        return [
-            'score' => $result['stress_score'],
-            'level' => $result['stress_level']
-        ];
-        */
-
-        return $this->predict($assessment);
-    }
-}
+    return [
+        'score' => round($score, 2),
+        'level' => $level
+    ];
+}}
