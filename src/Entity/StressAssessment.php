@@ -19,64 +19,64 @@ class StressAssessment
     private ?User $user = null;
 
     #[ORM\Column]
-    private ?int $sleepHours = null;
-
-
-
-    #[ORM\Column]
     private ?int $anxietyLevel = null;
 
     #[ORM\Column]
-    private ?int $moodLevel = null;
+    private ?int $selfEsteem = null;
 
-#[ORM\Column]
-private ?int $studyHours = null;
+    #[ORM\Column(length: 100)]
+    private ?string $mentalHealthHistory = null;
 
-#[ORM\Column]
-private ?int $extraCurricularHours = null;
+    #[ORM\Column]
+    private ?int $depression = null;
 
-#[ORM\Column(length: 50)]
-private ?string $physicalActivity = null;
+    #[ORM\Column]
+    private ?int $headache = null;
 
-#[ORM\Column(length: 100)]
-private ?string $dietQuality = null;
+    #[ORM\Column]
+    private ?int $bloodPressure = null;
 
-#[ORM\Column]
-private ?int $socialSupportLevel = null;
+    #[ORM\Column]
+    private ?int $sleepQuality = null;
 
-#[ORM\Column]
-private ?int $relationshipStatus = null;
+    #[ORM\Column]
+    private ?int $breathingProblem = null;
 
-#[ORM\Column(length: 100)]
-private ?string $futureCareerConcerns = null;
+    #[ORM\Column]
+    private ?int $noiseLevel = null;
 
-#[ORM\Column]
-private ?int $financialStress = null;
+    #[ORM\Column]
+    private ?int $livingConditions = null;
 
-#[ORM\Column]
-private ?int $academicWorkload = null;
+    #[ORM\Column]
+    private ?int $safety = null;
 
-#[ORM\Column]
-private ?int $examFrequency = null;
+    #[ORM\Column]
+    private ?int $basicNeeds = null;
 
-#[ORM\Column]
-private ?int $teacherStudentRelationship = null;
+    #[ORM\Column]
+    private ?int $academicPerformance = null;
 
-#[ORM\Column]
-private ?int $schoolType = null;
+    #[ORM\Column]
+    private ?int $studyLoad = null;
 
-#[ORM\Column(length: 50)]
-private ?string $peerInfluence = null;
+    #[ORM\Column]
+    private ?int $teacherStudentRelationship = null;
 
-#[ORM\Column]
-private ?int $familyIncome = null;
+    #[ORM\Column(length: 100)]
+    private ?string $futureCareerConcerns = null;
 
-#[ORM\Column]
-private ?int $remoteVsInPerson = null;
+    #[ORM\Column]
+    private ?int $socialSupport = null;
 
-#[ORM\Column(type: Types::TEXT, nullable: true)]
-private ?string $copingMechanisms = null;
+    #[ORM\Column]
+    private ?int $peerPressure = null;
 
+    #[ORM\Column]
+    private ?int $extracurricularActivities = null;
+
+    #[ORM\Column]
+    private ?int $bullying = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $stressScore = null;
@@ -92,6 +92,8 @@ private ?string $copingMechanisms = null;
         $this->createdAt = new \DateTime();
     }
 
+    // Getters & Setters
+
     public function getId(): ?int
     {
         return $this->id;
@@ -101,21 +103,9 @@ private ?string $copingMechanisms = null;
     {
         return $this->user;
     }
-
     public function setUser(?User $user): static
     {
         $this->user = $user;
-        return $this;
-    }
-
-    public function getSleepHours(): ?int
-    {
-        return $this->sleepHours;
-    }
-
-    public function setSleepHours(int $sleepHours): static
-    {
-        $this->sleepHours = $sleepHours;
         return $this;
     }
 
@@ -123,21 +113,199 @@ private ?string $copingMechanisms = null;
     {
         return $this->anxietyLevel;
     }
-
     public function setAnxietyLevel(int $anxietyLevel): static
     {
         $this->anxietyLevel = $anxietyLevel;
         return $this;
     }
 
-    public function getMoodLevel(): ?int
+    public function getSelfEsteem(): ?int
     {
-        return $this->moodLevel;
+        return $this->selfEsteem;
+    }
+    public function setSelfEsteem(int $selfEsteem): static
+    {
+        $this->selfEsteem = $selfEsteem;
+        return $this;
     }
 
-    public function setMoodLevel(int $moodLevel): static
+    public function getMentalHealthHistory(): ?string
     {
-        $this->moodLevel = $moodLevel;
+        return $this->mentalHealthHistory;
+    }
+    public function setMentalHealthHistory(string $mentalHealthHistory): static
+    {
+        $this->mentalHealthHistory = $mentalHealthHistory;
+        return $this;
+    }
+
+    public function getDepression(): ?int
+    {
+        return $this->depression;
+    }
+    public function setDepression(int $depression): static
+    {
+        $this->depression = $depression;
+        return $this;
+    }
+
+    public function getHeadache(): ?int
+    {
+        return $this->headache;
+    }
+    public function setHeadache(int $headache): static
+    {
+        $this->headache = $headache;
+        return $this;
+    }
+
+    public function getBloodPressure(): ?int
+    {
+        return $this->bloodPressure;
+    }
+    public function setBloodPressure(int $bloodPressure): static
+    {
+        $this->bloodPressure = $bloodPressure;
+        return $this;
+    }
+
+    public function getSleepQuality(): ?int
+    {
+        return $this->sleepQuality;
+    }
+    public function setSleepQuality(int $sleepQuality): static
+    {
+        $this->sleepQuality = $sleepQuality;
+        return $this;
+    }
+
+    public function getBreathingProblem(): ?int
+    {
+        return $this->breathingProblem;
+    }
+    public function setBreathingProblem(int $breathingProblem): static
+    {
+        $this->breathingProblem = $breathingProblem;
+        return $this;
+    }
+
+    public function getNoiseLevel(): ?int
+    {
+        return $this->noiseLevel;
+    }
+    public function setNoiseLevel(int $noiseLevel): static
+    {
+        $this->noiseLevel = $noiseLevel;
+        return $this;
+    }
+
+    public function getLivingConditions(): ?int
+    {
+        return $this->livingConditions;
+    }
+    public function setLivingConditions(int $livingConditions): static
+    {
+        $this->livingConditions = $livingConditions;
+        return $this;
+    }
+
+    public function getSafety(): ?int
+    {
+        return $this->safety;
+    }
+    public function setSafety(int $safety): static
+    {
+        $this->safety = $safety;
+        return $this;
+    }
+
+    public function getBasicNeeds(): ?int
+    {
+        return $this->basicNeeds;
+    }
+    public function setBasicNeeds(int $basicNeeds): static
+    {
+        $this->basicNeeds = $basicNeeds;
+        return $this;
+    }
+
+    public function getAcademicPerformance(): ?int
+    {
+        return $this->academicPerformance;
+    }
+    public function setAcademicPerformance(int $academicPerformance): static
+    {
+        $this->academicPerformance = $academicPerformance;
+        return $this;
+    }
+
+    public function getStudyLoad(): ?int
+    {
+        return $this->studyLoad;
+    }
+    public function setStudyLoad(int $studyLoad): static
+    {
+        $this->studyLoad = $studyLoad;
+        return $this;
+    }
+
+    public function getTeacherStudentRelationship(): ?int
+    {
+        return $this->teacherStudentRelationship;
+    }
+    public function setTeacherStudentRelationship(int $teacherStudentRelationship): static
+    {
+        $this->teacherStudentRelationship = $teacherStudentRelationship;
+        return $this;
+    }
+
+    public function getFutureCareerConcerns(): ?string
+    {
+        return $this->futureCareerConcerns;
+    }
+    public function setFutureCareerConcerns(string $futureCareerConcerns): static
+    {
+        $this->futureCareerConcerns = $futureCareerConcerns;
+        return $this;
+    }
+
+    public function getSocialSupport(): ?int
+    {
+        return $this->socialSupport;
+    }
+    public function setSocialSupport(int $socialSupport): static
+    {
+        $this->socialSupport = $socialSupport;
+        return $this;
+    }
+
+    public function getPeerPressure(): ?int
+    {
+        return $this->peerPressure;
+    }
+    public function setPeerPressure(int $peerPressure): static
+    {
+        $this->peerPressure = $peerPressure;
+        return $this;
+    }
+
+    public function getExtracurricularActivities(): ?int
+    {
+        return $this->extracurricularActivities;
+    }
+    public function setExtracurricularActivities(int $extracurricularActivities): static
+    {
+        $this->extracurricularActivities = $extracurricularActivities;
+        return $this;
+    }
+
+    public function getBullying(): ?int
+    {
+        return $this->bullying;
+    }
+    public function setBullying(int $bullying): static
+    {
+        $this->bullying = $bullying;
         return $this;
     }
 
@@ -145,7 +313,6 @@ private ?string $copingMechanisms = null;
     {
         return $this->stressScore;
     }
-
     public function setStressScore(?float $stressScore): static
     {
         $this->stressScore = $stressScore;
@@ -156,192 +323,16 @@ private ?string $copingMechanisms = null;
     {
         return $this->stressLevel;
     }
-
     public function setStressLevel(?string $stressLevel): static
     {
         $this->stressLevel = $stressLevel;
         return $this;
     }
-public function getStudyHours(): ?int
-{
-    return $this->studyHours;
-}
 
-public function setStudyHours(int $studyHours): static
-{
-    $this->studyHours = $studyHours;
-    return $this;
-}
-
-public function getExtraCurricularHours(): ?int
-{
-    return $this->extraCurricularHours;
-}
-
-public function setExtraCurricularHours(int $extraCurricularHours): static
-{
-    $this->extraCurricularHours = $extraCurricularHours;
-    return $this;
-}
-
-public function getPhysicalActivity(): ?string
-{
-    return $this->physicalActivity;
-}
-
-public function setPhysicalActivity(string $physicalActivity): static
-{
-    $this->physicalActivity = $physicalActivity;
-    return $this;
-}
-
-public function getDietQuality(): ?string
-{
-    return $this->dietQuality;
-}
-
-public function setDietQuality(string $dietQuality): static
-{
-    $this->dietQuality = $dietQuality;
-    return $this;
-}
-
-public function getSocialSupportLevel(): ?int
-{
-    return $this->socialSupportLevel;
-}
-
-public function setSocialSupportLevel(int $socialSupportLevel): static
-{
-    $this->socialSupportLevel = $socialSupportLevel;
-    return $this;
-}
-
-public function getRelationshipStatus(): ?int
-{
-    return $this->relationshipStatus;
-}
-
-public function setRelationshipStatus(int $relationshipStatus): static
-{
-    $this->relationshipStatus = $relationshipStatus;
-    return $this;
-}
-
-public function getFutureCareerConcerns(): ?string
-{
-    return $this->futureCareerConcerns;
-}
-
-public function setFutureCareerConcerns(string $futureCareerConcerns): static
-{
-    $this->futureCareerConcerns = $futureCareerConcerns;
-    return $this;
-}
-
-public function getFinancialStress(): ?int
-{
-    return $this->financialStress;
-}
-
-public function setFinancialStress(int $financialStress): static
-{
-    $this->financialStress = $financialStress;
-    return $this;
-}
-
-public function getAcademicWorkload(): ?int
-{
-    return $this->academicWorkload;
-}
-
-public function setAcademicWorkload(int $academicWorkload): static
-{
-    $this->academicWorkload = $academicWorkload;
-    return $this;
-}
-
-public function getExamFrequency(): ?int
-{
-    return $this->examFrequency;
-}
-
-public function setExamFrequency(int $examFrequency): static
-{
-    $this->examFrequency = $examFrequency;
-    return $this;
-}
-
-public function getTeacherStudentRelationship(): ?int
-{
-    return $this->teacherStudentRelationship;
-}
-
-public function setTeacherStudentRelationship(int $teacherStudentRelationship): static
-{
-    $this->teacherStudentRelationship = $teacherStudentRelationship;
-    return $this;
-}
-
-public function getSchoolType(): ?int
-{
-    return $this->schoolType;
-}
-
-public function setSchoolType(int $schoolType): static
-{
-    $this->schoolType = $schoolType;
-    return $this;
-}
-
-public function getPeerInfluence(): ?string
-{
-    return $this->peerInfluence;
-}
-
-public function setPeerInfluence(string $peerInfluence): static
-{
-    $this->peerInfluence = $peerInfluence;
-    return $this;
-}
-
-public function getFamilyIncome(): ?int
-{
-    return $this->familyIncome;
-}
-
-public function setFamilyIncome(int $familyIncome): static
-{
-    $this->familyIncome = $familyIncome;
-    return $this;
-}
-
-public function getRemoteVsInPerson(): ?int
-{
-    return $this->remoteVsInPerson;
-}
-
-public function setRemoteVsInPerson(int $remoteVsInPerson): static
-{
-    $this->remoteVsInPerson = $remoteVsInPerson;
-    return $this;
-}
-
-public function getCopingMechanisms(): ?string
-{
-    return $this->copingMechanisms;
-}
-
-public function setCopingMechanisms(?string $copingMechanisms): static
-{
-    $this->copingMechanisms = $copingMechanisms;
-    return $this;
-}
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
-
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
