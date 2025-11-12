@@ -3,143 +3,119 @@
 {% block title %}Stress Assessment{% endblock %}
 
 {% block body %}
+
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body p-5">
-                <h1 class="text-center mb-4">
-                    <i class="fas fa-clipboard-check text-primary"></i> Student Stress Assessment
-                </h1>
-                <p class="text-center text-muted mb-5">
-                    Please answer the following questions honestly to get an accurate assessment of your stress levels.
-                </p>
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body p-5">
+        <h1 class="text-center mb-4">
+          <i class="fas fa-clipboard-check text-primary"></i>
+          Student Stress Assessment
+        </h1>
 
-                {{ form_start(assessmentForm) }}
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.sleepHours) }}
-                        {{ form_widget(assessmentForm.sleepHours) }}
-                        {{ form_errors(assessmentForm.sleepHours) }}
-                    </div>
+        <p class="text-center text-muted mb-5">
+          Please answer the following questions honestly to get an accurate assessment of your stress levels.
+        </p>
 
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.studyHours) }}
-                        {{ form_widget(assessmentForm.studyHours) }}
-                        {{ form_errors(assessmentForm.studyHours) }}
-                    </div>
+        {{ form_start(assessmentForm, { attr: { class: 'needs-validation' } }) }}
 
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.extraCurricularHours) }}
-                        {{ form_widget(assessmentForm.extraCurricularHours) }}
-                        {{ form_errors(assessmentForm.extraCurricularHours) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.physicalActivity) }}
-                        {{ form_widget(assessmentForm.physicalActivity) }}
-                        {{ form_errors(assessmentForm.physicalActivity) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.dietQuality) }}
-                        {{ form_widget(assessmentForm.dietQuality) }}
-                        {{ form_errors(assessmentForm.dietQuality) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.anxietyLevel) }}
-                        {{ form_widget(assessmentForm.anxietyLevel) }}
-                        {{ form_errors(assessmentForm.anxietyLevel) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.moodLevel) }}
-                        {{ form_widget(assessmentForm.moodLevel) }}
-                        {{ form_errors(assessmentForm.moodLevel) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.socialSupportLevel) }}
-                        {{ form_widget(assessmentForm.socialSupportLevel) }}
-                        {{ form_errors(assessmentForm.socialSupportLevel) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.relationshipStatus) }}
-                        {{ form_widget(assessmentForm.relationshipStatus) }}
-                        {{ form_errors(assessmentForm.relationshipStatus) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.futureCareerConcerns) }}
-                        {{ form_widget(assessmentForm.futureCareerConcerns) }}
-                        {{ form_errors(assessmentForm.futureCareerConcerns) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.financialStress) }}
-                        {{ form_widget(assessmentForm.financialStress) }}
-                        {{ form_errors(assessmentForm.financialStress) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.academicWorkload) }}
-                        {{ form_widget(assessmentForm.academicWorkload) }}
-                        {{ form_errors(assessmentForm.academicWorkload) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.examFrequency) }}
-                        {{ form_widget(assessmentForm.examFrequency) }}
-                        {{ form_errors(assessmentForm.examFrequency) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.teacherStudentRelationship) }}
-                        {{ form_widget(assessmentForm.teacherStudentRelationship) }}
-                        {{ form_errors(assessmentForm.teacherStudentRelationship) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.schoolType) }}
-                        {{ form_widget(assessmentForm.schoolType) }}
-                        {{ form_errors(assessmentForm.schoolType) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.peerInfluence) }}
-                        {{ form_widget(assessmentForm.peerInfluence) }}
-                        {{ form_errors(assessmentForm.peerInfluence) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.familyIncome) }}
-                        {{ form_widget(assessmentForm.familyIncome) }}
-                        {{ form_errors(assessmentForm.familyIncome) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.remoteVsInPerson) }}
-                        {{ form_widget(assessmentForm.remoteVsInPerson) }}
-                        {{ form_errors(assessmentForm.remoteVsInPerson) }}
-                    </div>
-
-                    <div class="mb-4">
-                        {{ form_label(assessmentForm.copingMechanisms) }}
-                        {{ form_widget(assessmentForm.copingMechanisms) }}
-                        {{ form_errors(assessmentForm.copingMechanisms) }}
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-calculator"></i> Calculate My Stress Level
-                        </button>
-                        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left"></i> Back to Home
-                        </a>
-                    </div>
-                {{ form_end(assessmentForm) }}
-            </div>
+        {# === Lifestyle Section === #}
+        <h4 class="text-primary mb-3">Lifestyle</h4>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.sleepHours) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.studyHours) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.extraCurricularHours) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.physicalActivity) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.dietQuality) }}
+          </div>
         </div>
+
+        {# === Emotional & Mental Health Section === #}
+        <h4 class="text-primary mb-3 mt-4">Emotional & Mental Health</h4>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.anxietyLevel) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.moodLevel) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.socialSupportLevel) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.relationshipStatus) }}
+          </div>
+        </div>
+
+        {# === Academic Factors Section === #}
+        <h4 class="text-primary mb-3 mt-4">Academic Factors</h4>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.academicWorkload) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.examFrequency) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.teacherStudentRelationship) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.schoolType) }}
+          </div>
+        </div>
+
+        {# === Financial & Future Concerns Section === #}
+        <h4 class="text-primary mb-3 mt-4">Financial & Future Concerns</h4>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.financialStress) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.futureCareerConcerns) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.familyIncome) }}
+          </div>
+        </div>
+
+        {# === Social Environment Section === #}
+        <h4 class="text-primary mb-3 mt-4">Social Environment</h4>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.peerInfluence) }}
+          </div>
+          <div class="col-md-6 mb-4">
+            {{ form_row(assessmentForm.remoteVsInPerson) }}
+          </div>
+        </div>
+
+        {# === Coping Section === #}
+        <h4 class="text-primary mb-3 mt-4">Coping Mechanisms</h4>
+        <div class="mb-4">
+          {{ form_row(assessmentForm.copingMechanisms) }}
+        </div>
+
+        <div class="d-grid gap-3 mt-4">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-calculator"></i> Calculate My Stress Level
+          </button>
+          <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+
+        {{ form_end(assessmentForm) }}
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
