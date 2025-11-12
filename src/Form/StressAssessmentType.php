@@ -86,16 +86,20 @@ class StressAssessmentType extends AbstractType
             ])
             ->add('livingConditions', ChoiceType::class, [
                 'label' => 'How would you rate your living conditions?',
-                'choices' => array_combine(range(1, 5), [
-                    'Very Poor',
-                    'Poor',
-                    'Average',
-                    'Good',
-                    'Excellent'
-                ]),
+                'choices' => [
+                    'Very Poor' => 1,
+                    'Poor' => 2,
+                    'Average' => 3,
+                    'Good' => 4,
+                    'Excellent' => 5,
+                ],
                 'constraints' => [new NotBlank()],
                 'attr' => ['class' => 'form-select'],
+                'choice_attr' => function ($choice, $key, $value) {
+                    return ['value' => $value]; // ensures int values
+                },
             ])
+
             ->add('safety', ChoiceType::class, [
                 'label' => 'Do you feel safe in your environment?',
                 'choices' => [
@@ -179,15 +183,6 @@ class StressAssessmentType extends AbstractType
                 ],
                 'constraints' => [new NotBlank()],
                 'attr' => ['class' => 'form-select'],
-            ])
-            ->add('copingMechanisms', TextareaType::class, [
-                'label' => 'Coping Mechanisms (Optional)',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                    'rows' => 3,
-                    'placeholder' => 'e.g., meditation, journaling, talking to friends...',
-                ],
             ]);
     }
 

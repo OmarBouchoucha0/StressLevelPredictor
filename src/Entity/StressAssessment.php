@@ -328,7 +328,6 @@ class StressAssessment
         $this->stressLevel = $stressLevel;
         return $this;
     }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
