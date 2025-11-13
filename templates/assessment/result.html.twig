@@ -12,24 +12,27 @@
                 </h1>
 
 
-                <div class="row mb-5 align-items-stretch">
+
+                <div class="row mb-5 justify-content-center">
                     <div class="col-md-6 text-center mb-4 d-flex">
-                        <div class="p-4 bg-light rounded flex-fill">
-                            <h3 class="text-muted mb-3">Stress Score</h3>
-                            <h1 class="display-3 text-primary mb-0">{{ assessment.stressScore }}</h1>
-                            <p class="text-muted">out of 100</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center mb-4 d-flex">
-                        <div class="p-4 bg-light rounded flex-fill">
+                        <div class="p-5 bg-light rounded shadow-sm flex-fill">
                             <h3 class="text-muted mb-3">Stress Level</h3>
-                            {% set badgeClass = assessment.stressLevel == 'Low' ? 'success' :
-                                            (assessment.stressLevel == 'Moderate' ? 'warning' :
-                                            (assessment.stressLevel == 'High' ? 'danger' : 'dark')) %}
+
+                            {% set levelText = {
+                                0: 'Low',
+                                1: 'Moderate',
+                                2: 'High'
+                            }[assessment.stressLevel]|default('Unknown') %}
+
+                            {% set badgeClass = assessment.stressLevel == 0 ? 'success' :
+                                                (assessment.stressLevel == 1 ? 'warning' :
+                                                (assessment.stressLevel == 2 ? 'danger' : 'secondary')) %}
+
                             <h1 class="display-4">
-                                <span class="badge bg-{{ badgeClass }}">{{ assessment.stressLevel }}</span>
+                                <span class="badge bg-{{ badgeClass }} px-4 py-3">{{ levelText }}</span>
                             </h1>
-                        </div>
+
+                    </div>
                     </div>
                 </div>
                 <div class="mb-5">

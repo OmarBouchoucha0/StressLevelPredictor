@@ -15,17 +15,17 @@ class StressAssessmentType extends AbstractType
     {
         $builder
             ->add('anxietyLevel', ChoiceType::class, [
-                'label' => 'Anxiety Level (0 = Very Low, 20 = Very High)',
+                'label' => 'Anxiety Level (0 = Low, 20 = High)',
                 'choices' => array_combine(range(0, 20), range(0, 20)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('selfEsteem', ChoiceType::class, [
-                'label' => 'Self-Esteem Level (0 = Very Low, 30 = Very High)',
+                'label' => 'Self-Esteem Level (0 = Low, 30 = High)',
                 'choices' => array_combine(range(0, 30), range(0, 30)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('mentalHealthHistory', ChoiceType::class, [
-                'label' => 'History of Mental Health Issues(0 = None , 1 = Has)',
+                'label' => 'Mental Health Issues (0 = None , 1 = Has)',
                 'choices' => array_combine(range(0, 1), range(0, 1)),
                 'constraints' => [new NotBlank()],
             ])
@@ -50,12 +50,12 @@ class StressAssessmentType extends AbstractType
                 'constraints' => [new NotBlank()],
             ])
             ->add('breathingProblem', ChoiceType::class, [
-                'label' => 'Breathing Problems (0 = Poor , 5 = Excellent)',
+                'label' => 'Breathing Problems (0 = None , 5 = Severe)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('noiseLevel', ChoiceType::class, [
-                'label' => 'Noise Level(0 = Poor , 5 = Excellent)',
+                'label' => 'Noise Level(0 = None , 5 = Severe)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
@@ -65,13 +65,13 @@ class StressAssessmentType extends AbstractType
                 'constraints' => [new NotBlank()],
             ])
             ->add('safety', ChoiceType::class, [
-                'label' => 'safety(0 = Poor , 5 = Excellent)',
+                'label' => 'safety(0 = Low , 5 = High)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
 
             ->add('basicNeeds', ChoiceType::class, [
-                'label' => 'Basic Needs Met(0 = Poor , 5 = Excellent)',
+                'label' => 'Basic Needs Met(0 = None , 5 = Excellent)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
