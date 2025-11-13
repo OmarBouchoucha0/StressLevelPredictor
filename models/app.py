@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
+from os import path
 
 app = Flask(__name__)
-predict_model = joblib.load('supervised_model.pkl')
-cluster_model = joblib.load('clustering_model.pkl')
+BASE_DIR = path.dirname(__file__)  # directory of app.py
+predict_model = joblib.load(path.join(BASE_DIR, 'supervised_model.pkl'))
+cluster_model = joblib.load(path.join(BASE_DIR, 'clustering_model.pkl'))
 
 @app.route('/predict', methods=['POST'])
 def predict():
