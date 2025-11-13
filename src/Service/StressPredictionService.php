@@ -14,32 +14,34 @@ class StressPredictionService
         $this->client = $client;
     }
 
+
     private function formatData(StressAssessment $assessment): array
     {
-        return [
-            'anxiety_level' => $assessment->getAnxietyLevel(),
-            'self_esteem' => $assessment->getSelfEsteem(),
-            'mental_health_history' => $assessment->getMentalHealthHistory(),
-            'depression' => $assessment->getDepression(),
-            'headache' => $assessment->getHeadache(),
-            'blood_pressure' => $assessment->getBloodPressure(),
-            'sleep_quality' => $assessment->getSleepQuality(),
-            'breathing_problem' => $assessment->getBreathingProblem(),
-            'noise_level' => $assessment->getNoiseLevel(),
-            'living_conditions' => $assessment->getLivingConditions(),
-            'safety' => $assessment->getSafety(),
-            'basic_needs' => $assessment->getBasicNeeds(),
-            'academic_performance' => $assessment->getAcademicPerformance(),
-            'study_load' => $assessment->getStudyLoad(),
-            'teacher_student_relationship' => $assessment->getTeacherStudentRelationship(),
-            'future_career_concerns' => $assessment->getFutureCareerConcerns(),
-            'social_support' => $assessment->getSocialSupport(),
-            'peer_pressure' => $assessment->getPeerPressure(),
-            'extracurricular_activities' => $assessment->getExtracurricularActivities(),
-            'bullying' => $assessment->getBullying(),
+        $data = [
+            'anxiety_level' => (int)$assessment->getAnxietyLevel(),
+            'self_esteem' => (int)$assessment->getSelfEsteem(),
+            'mental_health_history' => (int)$assessment->getMentalHealthHistory(),
+            'depression' => (int)$assessment->getDepression(),
+            'headache' => (int)$assessment->getHeadache(),
+            'blood_pressure' => (int)$assessment->getBloodPressure(),
+            'sleep_quality' => (int)$assessment->getSleepQuality(),
+            'breathing_problem' => (int)$assessment->getBreathingProblem(),
+            'noise_level' => (int)$assessment->getNoiseLevel(),
+            'living_conditions' => (int)$assessment->getLivingConditions(),
+            'safety' => (int)$assessment->getSafety(),
+            'basic_needs' => (int)$assessment->getBasicNeeds(),
+            'academic_performance' => (int)$assessment->getAcademicPerformance(),
+            'study_load' => (int)$assessment->getStudyLoad(),
+            'teacher_student_relationship' => (int)$assessment->getTeacherStudentRelationship(),
+            'future_career_concerns' => (int)$assessment->getFutureCareerConcerns(),
+            'social_support' => (int)$assessment->getSocialSupport(),
+            'peer_pressure' => (int)$assessment->getPeerPressure(),
+            'extracurricular_activities' => (int)$assessment->getExtracurricularActivities(),
+            'bullying' => (int)$assessment->getBullying(),
         ];
-    }
 
+        return $data;
+    }
     public function predictStress(StressAssessment $assessment): string
     {
         $response = $this->client->request('POST', 'http://127.0.0.1:5000/predict', [
@@ -52,7 +54,7 @@ class StressPredictionService
 
     public function predictCluster(StressAssessment $assessment): int
     {
-        $response = $this->client->request('POST', 'http://127.0.0.1:5001/cluster', [
+        $response = $this->client->request('POST', 'http://127.0.0.1:5000/cluster', [
             'json' => $this->formatData($assessment)
         ]);
 
@@ -62,7 +64,7 @@ class StressPredictionService
 
     public function getRecommendations(StressAssessment $assessment): array
     {
-        $response = $this->client->request('POST', 'http://127.0.0.1:5002/recommend', [
+        $response = $this->client->request('POST', 'http://127.0.0.1:5000/recommend', [
             'json' => $this->formatData($assessment)
         ]);
 

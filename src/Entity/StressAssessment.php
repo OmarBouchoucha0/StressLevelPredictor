@@ -95,8 +95,6 @@ class StressAssessment
         $this->createdAt = new \DateTime();
     }
 
-    // Getters & Setters
-
     public function getId(): ?int
     {
         return $this->id;

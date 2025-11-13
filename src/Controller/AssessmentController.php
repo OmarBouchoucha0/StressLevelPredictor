@@ -21,6 +21,7 @@ class AssessmentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $assessment->setUser($this->getUser());
             $stressLevel = $mlService->predictStress($assessment);
             $assessment->setStressLevel($stressLevel);
             $cluster = $mlService->predictCluster($assessment);

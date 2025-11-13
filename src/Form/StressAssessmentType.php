@@ -101,7 +101,7 @@ class StressAssessmentType extends AbstractType
             ])
             ->add('extracurricularActivities', ChoiceType::class, [
                 'label' => 'Extracurricular Activities(0 = None, 5 = Extreme)',
-                'choices' => ['None' => 0, 'Occasional' => 1, 'Regular' => 2, 'Very Active' => 3],
+                'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('bullying', ChoiceType::class, [

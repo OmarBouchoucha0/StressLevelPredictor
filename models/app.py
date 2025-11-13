@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import numpy as np
 import joblib
 import pandas as pd
 from os import path
@@ -10,18 +11,12 @@ cluster_model = joblib.load(path.join(BASE_DIR, 'clustering_model.pkl'))
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.json
+    data = request.get_json()
     df = pd.DataFrame([data])
-    print(df.dtypes)
-    numeric_cols = [
-        'anxiety_level', 'self_esteem', 'mental_health_history', 'depression', 'headache',
-        'blood_pressure', 'sleep_quality', 'breathing_problem', 'noise_level',
-        'living_conditions', 'safety', 'basic_needs', 'academic_performance',
-        'study_load', 'teacher_student_relationship', 'future_career_concerns',
-        'social_support', 'peer_pressure', 'extracurricular_activities', 'bullying'
-    ]
-    df[numeric_cols] = df[numeric_cols].astype(int)
     prediction = predict_model.predict(df)[0]
+    if isinstance(prediction, np.integer):
+        prediction = int(prediction)
+
     return jsonify({'stress_level': prediction})
 
 @app.route('/cluster', methods=['POST'])
