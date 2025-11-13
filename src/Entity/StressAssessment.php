@@ -84,6 +84,9 @@ class StressAssessment
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $stressLevel = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $cluster;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -326,6 +329,17 @@ class StressAssessment
     public function setStressLevel(?string $stressLevel): static
     {
         $this->stressLevel = $stressLevel;
+        return $this;
+    }
+
+    public function getCluster(): ?int
+    {
+        return $this->cluster;
+    }
+
+    public function setCluster(int $cluster): self
+    {
+        $this->cluster = $cluster;
         return $this;
     }
     public function getCreatedAt(): ?\DateTimeInterface
