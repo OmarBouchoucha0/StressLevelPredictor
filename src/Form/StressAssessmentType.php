@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\StressAssessment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -16,176 +15,101 @@ class StressAssessmentType extends AbstractType
     {
         $builder
             ->add('anxietyLevel', ChoiceType::class, [
-                'label' => 'Anxiety Level (1 = Very Low, 10 = Very High)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Anxiety Level (0 = Very Low, 20 = Very High)',
+                'choices' => array_combine(range(0, 20), range(0, 20)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('selfEsteem', ChoiceType::class, [
-                'label' => 'Self-Esteem Level (1 = Very Low, 10 = Very High)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Self-Esteem Level (0 = Very Low, 30 = Very High)',
+                'choices' => array_combine(range(0, 30), range(0, 30)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('mentalHealthHistory', ChoiceType::class, [
-                'label' => 'Do you have a history of mental health issues?',
-                'choices' => [
-                    'No' => 'None',
-                    'Mild Issues' => 'Mild',
-                    'Moderate Issues' => 'Moderate',
-                    'Severe Issues' => 'Severe',
-                ],
+                'label' => 'History of Mental Health Issues(0 = None , 1 = Has)',
+                'choices' => array_combine(range(0, 1), range(0, 1)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('depression', ChoiceType::class, [
-                'label' => 'Depression Level (1 = None, 10 = Severe)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Depression Level (0 = None, 30 = Severe)',
+                'choices' => array_combine(range(1, 30), range(1, 30)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('headache', ChoiceType::class, [
-                'label' => 'Frequency of Headaches (1 = Rarely, 10 = Daily)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Headache Frequency (0 = Rarely, 5 = Daily)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('bloodPressure', ChoiceType::class, [
-                'label' => 'Blood Pressure Level (1 = Low, 10 = High)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('sleepQuality', ChoiceType::class, [
-                'label' => 'Sleep Quality (1 = Poor, 10 = Excellent)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('breathingProblem', ChoiceType::class, [
-                'label' => 'Do you experience breathing problems?',
-                'choices' => [
-                    'Never' => 0,
-                    'Occasionally' => 1,
-                    'Often' => 2,
-                    'Always' => 3,
-                ],
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('noiseLevel', ChoiceType::class, [
-                'label' => 'Noise Level in your environment',
-                'choices' => [
-                    'Quiet' => 1,
-                    'Moderate' => 2,
-                    'Noisy' => 3,
-                    'Very Noisy' => 4,
-                ],
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('livingConditions', ChoiceType::class, [
-                'label' => 'How would you rate your living conditions?',
-                'choices' => [
-                    'Very Poor' => 1,
-                    'Poor' => 2,
-                    'Average' => 3,
-                    'Good' => 4,
-                    'Excellent' => 5,
-                ],
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-                'choice_attr' => function ($choice, $key, $value) {
-                    return ['value' => $value]; // ensures int values
-                },
-            ])
-
-            ->add('safety', ChoiceType::class, [
-                'label' => 'Do you feel safe in your environment?',
-                'choices' => [
-                    'Never' => 0,
-                    'Sometimes' => 1,
-                    'Mostly' => 2,
-                    'Always' => 3,
-                ],
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('basicNeeds', ChoiceType::class, [
-                'label' => 'Are your basic needs (food, water, shelter) met?',
-                'choices' => [
-                    'Not at all' => 0,
-                    'Partially' => 1,
-                    'Mostly' => 2,
-                    'Completely' => 3,
-                ],
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('academicPerformance', ChoiceType::class, [
-                'label' => 'Academic Performance (1 = Poor, 10 = Excellent)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('studyLoad', ChoiceType::class, [
-                'label' => 'Study Load (1 = Very Light, 10 = Extremely Heavy)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
-                'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
-            ])
-            ->add('teacherStudentRelationship', ChoiceType::class, [
-                'label' => 'Teacher-Student Relationship (1 = Poor, 5 = Excellent)',
+                'label' => 'Blood Pressure Level (1 = Low, 5 = High)',
                 'choices' => array_combine(range(1, 5), range(1, 5)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
+            ])
+            ->add('sleepQuality', ChoiceType::class, [
+                'label' => 'Sleep Quality (0 = Poor, 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('breathingProblem', ChoiceType::class, [
+                'label' => 'Breathing Problems (0 = Poor , 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('noiseLevel', ChoiceType::class, [
+                'label' => 'Noise Level(0 = Poor , 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('livingConditions', ChoiceType::class, [
+                'label' => 'Living Conditions(0 = Poor , 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('basicNeeds', ChoiceType::class, [
+                'label' => 'Basic Needs Met(0 = Poor , 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('academicPerformance', ChoiceType::class, [
+                'label' => 'Academic Performance (0 = Poor, 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('studyLoad', ChoiceType::class, [
+                'label' => 'Study Load (0 = Very Light, 5 = Extremely Heavy)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('teacherStudentRelationship', ChoiceType::class, [
+                'label' => 'Teacher-Student Relationship (0 = Poor, 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
             ])
             ->add('futureCareerConcerns', ChoiceType::class, [
-                'label' => 'How concerned are you about your future career?',
-                'choices' => [
-                    'Not Concerned' => 'Low',
-                    'Somewhat Concerned' => 'Moderate',
-                    'Very Concerned' => 'High',
-                ],
+                'label' => 'Future Career Concerns(0 = Poor, 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('socialSupport', ChoiceType::class, [
-                'label' => 'Social Support (1 = None, 10 = Excellent)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Social Support (0 = None, 3 = Excellent)',
+                'choices' => array_combine(range(0, 3), range(0, 3)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('peerPressure', ChoiceType::class, [
-                'label' => 'Peer Pressure (1 = None, 10 = Extreme)',
-                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Peer Pressure (0 = None, 5 = Extreme)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('extracurricularActivities', ChoiceType::class, [
-                'label' => 'Participation in Extracurricular Activities',
-                'choices' => [
-                    'None' => 0,
-                    'Occasional' => 1,
-                    'Regular' => 2,
-                    'Very Active' => 3,
-                ],
+                'label' => 'Extracurricular Activities(0 = None, 5 = Extreme)',
+                'choices' => ['None' => 0, 'Occasional' => 1, 'Regular' => 2, 'Very Active' => 3],
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ])
             ->add('bullying', ChoiceType::class, [
-                'label' => 'Have you experienced bullying?',
-                'choices' => [
-                    'Never' => 0,
-                    'Sometimes' => 1,
-                    'Often' => 2,
-                    'Always' => 3,
-                ],
+                'label' => 'Experienced Bullying(0 = None, 5 = Extreme)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
-                'attr' => ['class' => 'form-select'],
             ]);
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

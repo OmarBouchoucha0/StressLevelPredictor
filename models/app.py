@@ -12,6 +12,15 @@ cluster_model = joblib.load(path.join(BASE_DIR, 'clustering_model.pkl'))
 def predict():
     data = request.json
     df = pd.DataFrame([data])
+    print(df.dtypes)
+    numeric_cols = [
+        'anxiety_level', 'self_esteem', 'mental_health_history', 'depression', 'headache',
+        'blood_pressure', 'sleep_quality', 'breathing_problem', 'noise_level',
+        'living_conditions', 'safety', 'basic_needs', 'academic_performance',
+        'study_load', 'teacher_student_relationship', 'future_career_concerns',
+        'social_support', 'peer_pressure', 'extracurricular_activities', 'bullying'
+    ]
+    df[numeric_cols] = df[numeric_cols].astype(int)
     prediction = predict_model.predict(df)[0]
     return jsonify({'stress_level': prediction})
 

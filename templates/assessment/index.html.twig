@@ -3,6 +3,7 @@
 {% block title %}Stress Assessment{% endblock %}
 
 {% block body %}
+
 <div class="row justify-content-center">
   <div class="col-lg-8">
     <div class="card shadow-sm">
@@ -20,77 +21,47 @@
 
         {# === Emotional & Mental Health Section === #}
         <h4 class="text-primary mb-3">Emotional & Mental Health</h4>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.anxietyLevel) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.selfEsteem) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.mentalHealthHistory) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.depression) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.headache) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.bloodPressure) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.sleepQuality) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.breathingProblem) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.noiseLevel) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.livingConditions) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.safety) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.basicNeeds) }}
-          </div>
+        <div class="row g-3">
+          {% for field in [
+            'anxietyLevel', 'selfEsteem', 'mentalHealthHistory', 'depression', 'headache',
+            'bloodPressure', 'sleepQuality', 'breathingProblem', 'noiseLevel', 'livingConditions', 'basicNeeds'
+          ] %}
+            <div class="col-md-6">
+              <div class="mb-3">
+                {{ form_label(attribute(assessmentForm, field)) }}
+                {{ form_widget(attribute(assessmentForm, field), { 'attr': {'class': 'form-select'} }) }}
+                {{ form_errors(attribute(assessmentForm, field)) }}
+              </div>
+            </div>
+          {% endfor %}
         </div>
 
         {# === Academic Section === #}
         <h4 class="text-primary mb-3 mt-4">Academic Factors</h4>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.academicPerformance) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.studyLoad) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.teacherStudentRelationship) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.futureCareerConcerns) }}
-          </div>
+        <div class="row g-3">
+          {% for field in ['academicPerformance', 'studyLoad', 'teacherStudentRelationship', 'futureCareerConcerns'] %}
+            <div class="col-md-6">
+              <div class="mb-3">
+                {{ form_label(attribute(assessmentForm, field)) }}
+                {{ form_widget(attribute(assessmentForm, field), { 'attr': {'class': 'form-select'} }) }}
+                {{ form_errors(attribute(assessmentForm, field)) }}
+              </div>
+            </div>
+          {% endfor %}
         </div>
 
         {# === Social Section === #}
         <h4 class="text-primary mb-3 mt-4">Social Environment</h4>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.socialSupport) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.peerPressure) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.extracurricularActivities) }}
-          </div>
-          <div class="col-md-6 mb-4">
-            {{ form_row(assessmentForm.bullying) }}
-          </div>
+        <div class="row g-3">
+          {% for field in ['socialSupport', 'peerPressure', 'extracurricularActivities', 'bullying'] %}
+            <div class="col-md-6">
+              <div class="mb-3">
+                {{ form_label(attribute(assessmentForm, field)) }}
+                {{ form_widget(attribute(assessmentForm, field), { 'attr': {'class': 'form-select'} }) }}
+                {{ form_errors(attribute(assessmentForm, field)) }}
+              </div>
+            </div>
+          {% endfor %}
         </div>
 
         <div class="d-grid gap-2 mt-4">

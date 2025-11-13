@@ -23,17 +23,12 @@ class AssessmentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $stressLevel = $mlService->predictStress($assessment);
             $assessment->setStressLevel($stressLevel);
-
             $cluster = $mlService->predictCluster($assessment);
             $assessment->setCluster($cluster);
-
             $recommendations = $mlService->getRecommendations($assessment);
-
             $em->persist($assessment);
             $em->flush();
-
             $this->addFlash('recommendations', json_encode($recommendations));
-
             return $this->redirectToRoute('assessment_result', [
                 'id' => $assessment->getId(),
             ]);

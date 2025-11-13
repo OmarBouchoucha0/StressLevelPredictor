@@ -25,7 +25,7 @@ class StressAssessment
     private ?int $selfEsteem = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $mentalHealthHistory = null;
+    private ?int $mentalHealthHistory = null;
 
     #[ORM\Column]
     private ?int $depression = null;
@@ -64,7 +64,7 @@ class StressAssessment
     private ?int $teacherStudentRelationship = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $futureCareerConcerns = null;
+    private ?int $futureCareerConcerns = null;
 
     #[ORM\Column]
     private ?int $socialSupport = null;
@@ -79,10 +79,10 @@ class StressAssessment
     private ?int $bullying = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $stressScore = null;
+    private ?int $stressScore = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $stressLevel = null;
+    private ?int $stressLevel = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $cluster;
