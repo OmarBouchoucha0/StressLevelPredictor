@@ -64,6 +64,12 @@ class StressAssessmentType extends AbstractType
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
+            ->add('safety', ChoiceType::class, [
+                'label' => 'safety(0 = Poor , 5 = Excellent)',
+                'choices' => array_combine(range(0, 5), range(0, 5)),
+                'constraints' => [new NotBlank()],
+            ])
+
             ->add('basicNeeds', ChoiceType::class, [
                 'label' => 'Basic Needs Met(0 = Poor , 5 = Excellent)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
