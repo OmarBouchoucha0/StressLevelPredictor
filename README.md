@@ -1,9 +1,9 @@
-# 🧠 Stress Level Predictor
+# Level Predictor
 
 A web application that predicts your stress level based on lifestyle factors and
 provides personalized recommendations to help you manage stress better.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -58,7 +58,7 @@ php bin/console doctrine:migrations:migrate
 http://localhost:8000
 ```
 
-## 📖 Usage
+## Usage
 
 1. **Register** - Create a new account
 2. **Login** - Sign in with your credentials
@@ -66,24 +66,7 @@ http://localhost:8000
 4. **View Results** - See your stress level and personalized recommendations
 5. **Track Progress** - Take assessments regularly to monitor your stress levels
 
-## 📁 Project Structure
-
-```
-stress-predictor/
-├── src/
-│   ├── Controller/         # Application controllers
-│   ├── Entity/            # Database entities
-│   ├── Form/              # Form types
-│   ├── Repository/        # Database repositories
-│   ├── Security/          # Authentication logic
-│   └── Service/           # Business logic (ML model integration)
-├── templates/             # Twig templates
-├── config/                # Configuration files
-├── model/                 # ML Model Api
-└── public/                # Twig templates
-```
-
-## 🔧 Configuration
+## Configuration
 
 ### Database
 
@@ -98,5 +81,3 @@ DATABASE_URL="mysql://user:password@127.0.0.1:3306/stress_predictor"
 # PostgreSQL
 DATABASE_URL="postgresql://user:password@127.0.0.1:5432/stress_predictor"
 ```
-
-⭐ If you find this project helpful, please give it a star!
