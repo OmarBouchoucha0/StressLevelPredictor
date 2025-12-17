@@ -23,8 +23,8 @@
         <h4 class="text-primary mb-3">Emotional & Mental Health</h4>
         <div class="row g-3">
           {% for field in [
-            'anxietyLevel', 'selfEsteem', 'mentalHealthHistory', 'depression', 'headache',
-            'bloodPressure', 'sleepQuality', 'breathingProblem', 'noiseLevel', 'livingConditions', 'safety','basicNeeds'
+            'anxietyLevel', 'selfEsteem',  'depression', 'headache',
+             'sleepQuality', 'basicNeeds'
           ] %}
             <div class="col-md-6">
               <div class="mb-3">
@@ -39,7 +39,7 @@
         {# === Academic Section === #}
         <h4 class="text-primary mb-3 mt-4">Academic Factors</h4>
         <div class="row g-3">
-          {% for field in ['academicPerformance', 'studyLoad', 'teacherStudentRelationship', 'futureCareerConcerns'] %}
+          {% for field in ['academicPerformance' ] %}
             <div class="col-md-6">
               <div class="mb-3">
                 {{ form_label(attribute(assessmentForm, field)) }}
@@ -53,7 +53,7 @@
         {# === Social Section === #}
         <h4 class="text-primary mb-3 mt-4">Social Environment</h4>
         <div class="row g-3">
-          {% for field in ['socialSupport', 'peerPressure', 'extracurricularActivities', 'bullying'] %}
+          {% for field in ['extracurricularActivities', 'bullying','peerPressure'] %}
             <div class="col-md-6">
               <div class="mb-3">
                 {{ form_label(attribute(assessmentForm, field)) }}
