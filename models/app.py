@@ -8,17 +8,37 @@ app = Flask(__name__)
 BASE_DIR = path.dirname(__file__)  # directory of app.py
 predict_model = joblib.load(path.join(BASE_DIR, 'supervised_model.pkl'))
 cluster_model = joblib.load(path.join(BASE_DIR, 'clustering_model.pkl'))
+svr = joblib.load(path.join(BASE_DIR,'stress_svr_model.pkl'))
+kmeans = joblib.load(path.join(BASE_DIR,'stress_kmeans_model.pkl'))
+scaler = joblib.load(path.join(BASE_DIR,'stress_scaler.pkl'))
+metadata = joblib.load(path.join(BASE_DIR,'model_metadata.pkl'))
+
+TOP_FEATURES = metadata['features']
+CLUSTER_MAPPING = metadata['cluster_mapping']
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # data = request.get_json()
+    # df = pd.DataFrame([data])
+    # prediction = predict_model.predict(df)[0]
+    # if isinstance(prediction, np.integer):
+    #     prediction = int(prediction)
+    #
+    # return jsonify({'stress_level': prediction})
+    #
     data = request.get_json()
     df = pd.DataFrame([data])
-    prediction = predict_model.predict(df)[0]
-    if isinstance(prediction, np.integer):
-        prediction = int(prediction)
 
-    return jsonify({'stress_level': prediction})
+    # 1. Select & Scale
+    X_selected = df[TOP_FEATURES]
+    X_scaled = scaler.transform(X_selected)
 
+    # 2. SVR Prediction
+    score = svr.predict(X_scaled)[0]
+
+    return jsonify({
+        'stress_score': float(round(score, 2))
+    })
 @app.route('/cluster', methods=['POST'])
 def cluster():
     data = request.json
