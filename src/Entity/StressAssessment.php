@@ -58,7 +58,7 @@ class StressAssessment
     private $cluster;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    private $stressCatagory;
+    private $stressCategory;
 
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -214,13 +214,13 @@ class StressAssessment
         return $this;
     }
 
-    public function getStressCatagory(): ?int
+    public function getStressCategory(): ?string
     {
-        return $this->stressCatagory;
+        return $this->stressCategory;
     }
-    public function setStressCatagory(int $cluster): self
+    public function setStressCategory(?string $cluster): self
     {
-        $this->stressCatagory = $cluster;
+        $this->stressCategory = $cluster;
         return $this;
     }
 
