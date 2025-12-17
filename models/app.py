@@ -39,22 +39,39 @@ def predict():
     return jsonify({
         'stress_score': float(round(score, 2))
     })
+
 @app.route('/cluster', methods=['POST'])
 def cluster():
+    # 1. Get data from request
     data = request.json
     df = pd.DataFrame([data])
 
-    # Predict cluster
-    cluster_label = int(cluster_model.predict(df)[0])
-    return jsonify({'cluster': cluster_label})
+    try:
+        # 2. Select only the TOP_FEATURES used during training
+        # This prevents the model from crashing if extra data is sent
+        df_selected = df[TOP_FEATURES]
+
+        # 3. Apply the same scaler used during training
+        # CRITICAL: K-Means is very sensitive to feature scales
+        X_scaled = scaler.transform(df_selected)
+
+        # 4. Predict the cluster integer
+        cluster_id = int(kmeans.predict(X_scaled)[0])
+
+        # 5. Map the integer to the label (Low, Moderate, High)
+        # Using the mapping dictionary we created earlier
+        category_name = CLUSTER_MAPPING.get(cluster_id, "Unknown")
+
+        return jsonify({
+            'cluster_id': cluster_id,
+            'category': category_name
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 def generate_recommendations(user_features):
     recommendations = []
-
-    if user_features.get('blood_pressure') > 3:
-        recommendations.append("Consider consulting a healthcare professional for blood pressure management.")
-    elif user_features.get('blood_pressure') < 2:
-        recommendations.append("Maintain a healthy lifestyle to keep blood pressure in check.")
 
     if user_features.get('depression') > 15:
         recommendations.append("Seek professional mental health support or therapy for depression.")
@@ -65,16 +82,6 @@ def generate_recommendations(user_features):
         recommendations.append("Explore relaxation techniques like mindfulness or deep breathing, and consider professional help for anxiety.")
     elif user_features.get('anxiety_level') < 5:
         recommendations.append("Your anxiety levels are low. Keep engaging in activities that bring you joy and calm.")
-
-    if user_features.get('academic_performance') < 2:
-        recommendations.append("Look into academic support, study groups, or time management strategies to improve performance.")
-    elif user_features.get('academic_performance') > 3:
-        recommendations.append("Maintain your strong academic habits.")
-
-    if user_features.get('basic_needs') < 2:
-        recommendations.append("Ensure your basic needs (food, shelter, safety) are met. Seek community resources if needed.")
-    elif user_features.get('basic_needs') > 3:
-        recommendations.append("Good job in ensuring your basic needs are met, which is fundamental for well-being.")
 
     if user_features.get('sleep_quality') < 2:
         recommendations.append("Improve sleep hygiene: establish a consistent sleep schedule, create a relaxing bedtime routine, and avoid screens before bed.")

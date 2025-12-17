@@ -20,21 +20,11 @@ class StressPredictionService
         $data = [
             'anxiety_level' => (int)$assessment->getAnxietyLevel(),
             'self_esteem' => (int)$assessment->getSelfEsteem(),
-            'mental_health_history' => (int)$assessment->getMentalHealthHistory(),
             'depression' => (int)$assessment->getDepression(),
             'headache' => (int)$assessment->getHeadache(),
-            'blood_pressure' => (int)$assessment->getBloodPressure(),
             'sleep_quality' => (int)$assessment->getSleepQuality(),
-            'breathing_problem' => (int)$assessment->getBreathingProblem(),
-            'noise_level' => (int)$assessment->getNoiseLevel(),
-            'living_conditions' => (int)$assessment->getLivingConditions(),
-            'safety' => (int)$assessment->getSafety(),
             'basic_needs' => (int)$assessment->getBasicNeeds(),
             'academic_performance' => (int)$assessment->getAcademicPerformance(),
-            'study_load' => (int)$assessment->getStudyLoad(),
-            'teacher_student_relationship' => (int)$assessment->getTeacherStudentRelationship(),
-            'future_career_concerns' => (int)$assessment->getFutureCareerConcerns(),
-            'social_support' => (int)$assessment->getSocialSupport(),
             'peer_pressure' => (int)$assessment->getPeerPressure(),
             'extracurricular_activities' => (int)$assessment->getExtracurricularActivities(),
             'bullying' => (int)$assessment->getBullying(),
@@ -49,19 +39,17 @@ class StressPredictionService
         ]);
 
         $data = $response->toArray();
-        return $data['stress_level'];
+        return (float)($data['stress_level_continuous'] ?? 0.0);
     }
 
-    public function predictCluster(StressAssessment $assessment): int
+    public function predictCluster(StressAssessment $assessment): array
     {
         $response = $this->client->request('POST', 'http://127.0.0.1:5000/cluster', [
             'json' => $this->formatData($assessment)
         ]);
 
-        $data = $response->toArray();
-        return $data['cluster'];
+        return $response->toArray();
     }
-
     public function getRecommendations(StressAssessment $assessment): array
     {
         $response = $this->client->request('POST', 'http://127.0.0.1:5000/recommend', [

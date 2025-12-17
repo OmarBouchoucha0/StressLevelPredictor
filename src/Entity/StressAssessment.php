@@ -57,6 +57,10 @@ class StressAssessment
     #[ORM\Column(type: 'integer', nullable: true)]
     private $cluster;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private $stressCatagory;
+
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -150,10 +154,6 @@ class StressAssessment
         return $this;
     }
 
-
-
-
-
     public function getPeerPressure(): ?int
     {
         return $this->peerPressure;
@@ -208,12 +208,22 @@ class StressAssessment
     {
         return $this->cluster;
     }
-
     public function setCluster(int $cluster): self
     {
         $this->cluster = $cluster;
         return $this;
     }
+
+    public function getStressCatagory(): ?int
+    {
+        return $this->stressCatagory;
+    }
+    public function setStressCatagory(int $cluster): self
+    {
+        $this->stressCatagory = $cluster;
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
