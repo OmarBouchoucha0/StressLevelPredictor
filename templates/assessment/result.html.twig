@@ -16,28 +16,35 @@
                 <div class="row mb-5 justify-content-center">
                     <div class="col-md-6 text-center mb-4 d-flex">
                         <div class="p-5 bg-light rounded shadow-sm flex-fill">
-                            <h3 class="text-muted mb-3">Stress Level</h3>
+                            <h3 class="text-muted mb-3">Stress Category</h3>
 
-                            {% set levelText = {
-                                0: 'Low',
-                                1: 'Moderate',
-                                2: 'High'
-                            }[assessment.stressLevel]|default('Unknown') %}
+                            {# Use the string category directly from your entity #}
+                            {% set category = assessment.stressCategory|default('Unknown') %}
 
-                            {% set badgeClass = assessment.stressLevel == 0 ? 'success' :
-                                                (assessment.stressLevel == 1 ? 'warning' :
-                                                (assessment.stressLevel == 2 ? 'danger' : 'secondary')) %}
+                            {# Set badge color based on the category string #}
+                            {% set badgeClass = category == 'Low Stress' ? 'success' :
+                                            (category == 'Moderate Stress' ? 'warning' :
+                                            (category == 'High Stress' ? 'danger' : 'secondary')) %}
 
                             <h1 class="display-4">
-                                <span class="badge bg-{{ badgeClass }} px-4 py-3">{{ levelText }}</span>
+                                <span class="badge bg-{{ badgeClass }} px-4 py-3">{{ category }}</span>
                             </h1>
 
-                    </div>
+                            <hr>
+
+                            {# Display the continuous score for more detail #}
+                            <div class="mt-3">
+                                <p class="text-muted mb-1">Precise Intensity Score</p>
+                                <h4 class="fw-bold">{{ assessment.stressLevel|number_format(2) }}</h4>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="mb-5">
                     <h3 class="mb-4">
-                        <i class="fas fa-lightbulb text-warning"></i> Recommended Actions
+                        Recommended Actions
                     </h3>
                     <div class="list-group">
                         {% for recommendation in recommendations %}

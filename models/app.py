@@ -35,9 +35,9 @@ def predict():
 
     # 2. SVR Prediction
     score = svr.predict(X_scaled)[0]
-
+    print(score)
     return jsonify({
-        'stress_score': float(round(score, 2))
+        'stress_level': int(round(score*50, 2))
     })
 
 @app.route('/cluster', methods=['POST'])
