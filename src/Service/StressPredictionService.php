@@ -39,7 +39,7 @@ class StressPredictionService
         ]);
 
         $data = $response->toArray();
-        return (float)($data['stress_level_continuous'] ?? 0.0);
+        return (float)($data['stress_level'] ?? 0.0);
     }
 
     public function predictCluster(StressAssessment $assessment): array

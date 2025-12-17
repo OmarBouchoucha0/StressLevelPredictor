@@ -26,7 +26,7 @@ class StressAssessmentType extends AbstractType
             ])
             ->add('depression', ChoiceType::class, [
                 'label' => 'Depression Level (0 = None, 30 = Severe)',
-                'choices' => array_combine(range(1, 30), range(1, 30)),
+                'choices' => array_combine(range(0, 30), range(0, 30)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('headache', ChoiceType::class, [
