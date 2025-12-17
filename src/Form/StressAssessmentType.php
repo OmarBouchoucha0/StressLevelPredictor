@@ -24,11 +24,6 @@ class StressAssessmentType extends AbstractType
                 'choices' => array_combine(range(0, 30), range(0, 30)),
                 'constraints' => [new NotBlank()],
             ])
-            ->add('mentalHealthHistory', ChoiceType::class, [
-                'label' => 'Mental Health Issues (0 = None , 1 = Has)',
-                'choices' => array_combine(range(0, 1), range(0, 1)),
-                'constraints' => [new NotBlank()],
-            ])
             ->add('depression', ChoiceType::class, [
                 'label' => 'Depression Level (0 = None, 30 = Severe)',
                 'choices' => array_combine(range(1, 30), range(1, 30)),
@@ -39,33 +34,8 @@ class StressAssessmentType extends AbstractType
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
-            ->add('bloodPressure', ChoiceType::class, [
-                'label' => 'Blood Pressure Level (1 = Low, 5 = High)',
-                'choices' => array_combine(range(1, 5), range(1, 5)),
-                'constraints' => [new NotBlank()],
-            ])
             ->add('sleepQuality', ChoiceType::class, [
                 'label' => 'Sleep Quality (0 = Poor, 5 = Excellent)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('breathingProblem', ChoiceType::class, [
-                'label' => 'Breathing Problems (0 = None , 5 = Severe)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('noiseLevel', ChoiceType::class, [
-                'label' => 'Noise Level(0 = None , 5 = Severe)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('livingConditions', ChoiceType::class, [
-                'label' => 'Living Conditions(0 = Poor , 5 = Excellent)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('safety', ChoiceType::class, [
-                'label' => 'safety(0 = Low , 5 = High)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
                 'constraints' => [new NotBlank()],
             ])
@@ -78,26 +48,6 @@ class StressAssessmentType extends AbstractType
             ->add('academicPerformance', ChoiceType::class, [
                 'label' => 'Academic Performance (0 = Poor, 5 = Excellent)',
                 'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('studyLoad', ChoiceType::class, [
-                'label' => 'Study Load (0 = Very Light, 5 = Extremely Heavy)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('teacherStudentRelationship', ChoiceType::class, [
-                'label' => 'Teacher-Student Relationship (0 = Poor, 5 = Excellent)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('futureCareerConcerns', ChoiceType::class, [
-                'label' => 'Future Career Concerns(0 = Poor, 5 = Excellent)',
-                'choices' => array_combine(range(0, 5), range(0, 5)),
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('socialSupport', ChoiceType::class, [
-                'label' => 'Social Support (0 = None, 3 = Excellent)',
-                'choices' => array_combine(range(0, 3), range(0, 3)),
                 'constraints' => [new NotBlank()],
             ])
             ->add('peerPressure', ChoiceType::class, [
