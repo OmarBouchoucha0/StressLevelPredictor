@@ -86,7 +86,7 @@ def generate_recommendations(user_features):
     if user_features.get('sleep_quality') < 2:
         recommendations.append("Improve sleep hygiene: establish a consistent sleep schedule, create a relaxing bedtime routine, and avoid screens before bed.")
     elif user_features.get('sleep_quality') > 3:
-        recommendations.append("You have good sleep quality; continue your healthy sleep habits.")
+        recommendations.append("You have good sleep quality, continue your healthy sleep habits.")
 
     if not recommendations:
         recommendations.append("Based on your current inputs, no specific high-priority stress management recommendations were generated. Continue maintaining a balanced lifestyle.")
